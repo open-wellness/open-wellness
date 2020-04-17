@@ -1,0 +1,59 @@
+<%= form_with(model: workout, local: true) do |form| %>
+  <% if workout.errors.any? %>
+    <div class="notification is-danger">
+      <button class="delete"></button>
+      <h2><%= pluralize(workout.errors.count, "error") %> prohibited this workout from being saved:</h2>
+      <ul>
+        <% workout.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="columns">
+    <div class="column is-half">
+      <div class="field">
+        <%= form.label :title, class: "label" %>
+        <div class="control">
+          <%= form.text_field :title, class: "input is-dark is-radiusless", placeholder: "e.g. 10 minute HIIT Home Workout" %>
+        </div>
+      </div>
+      
+      <div class="field">
+        <%= form.label :description, class: "label" %>
+        <%= form.rich_text_area :description, style: "height: 350px;" %>
+      </div>
+    </div>
+    <div class="column">
+      <div class="field">
+        <%= form.label :video_clip, class: "label" %>
+        <div class="file has-name is-dark is-fullwidth">
+          <label class="file-label is-fullwidth">
+            <%= form.file_field :video_clip, class: "file-input", style: "display: none;" %>
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fas fa-upload"></i>
+              </span>
+              <span class="file-label">
+                Choose a file...
+              </span>
+            </span>
+            <span class="file-name">
+              No file selected.
+            </span>
+          </label>
+        </div>
+      </div>
+      <% if !@workout.video_clip.present? %>
+        <%#= image_tag @workout.video_clip.preview(resize: "400x400") %>
+      <% else %>
+        <%= video_tag url_for(@workout.video_clip), controls: '' %>
+      <% end %>
+      <br />
+      <div class="actions">
+        <%= form.submit 'Upload', :class => 'button is-dark is-radiusless is-fullwidth' %>
+      </div>
+    </div>
+  </div>
+<% end %>

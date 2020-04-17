@@ -1,0 +1,11 @@
+default: &default
+  default_redirect_url: ""
+  ghana_mobile_money_redirect_url: ""
+  uganda_mobile_money_redirect_url: ""
+  zambia_mobile_money_redirect_url: ""
+
+development:
+  <<: *default
+
+production:
+  <<: *default

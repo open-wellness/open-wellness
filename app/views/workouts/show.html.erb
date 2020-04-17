@@ -1,0 +1,18 @@
+<% if notice %>
+  <div class="notification is-info">
+    <button class="delete"></button>
+    <%= notice %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', workouts_path %>
+
+<div class="columns">
+  <div class="column is-half">
+    <%= video_tag(url_for(@workout.video_clip), controls: '') %>
+  </div>
+  <div class="column is-half">
+    <h1 class="title"><%= @workout.title %></h1> <%= link_to 'Edit', edit_workout_path(@workout) %>
+    <p class="content"><%= @workout.description %></p>
+  </div>
+</div>
